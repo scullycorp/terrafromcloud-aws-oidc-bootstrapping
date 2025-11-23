@@ -1,8 +1,8 @@
-resource tfe_workspace "project_manager_workspace" {
-  name         = "${var.terraform_project}_ProjectManager"
-  organization = var.terraform_organization
-  project_id   = tfe_project.aws_search_project.id
-  description = "Configures AWS bootstrap configuration details"
+resource "tfe_workspace" "project_manager_workspace" {
+  name              = "${var.terraform_project}_ProjectManager"
+  organization      = var.terraform_organization
+  project_id        = tfe_project.aws_search_project.id
+  description       = "Configures AWS bootstrap configuration details"
   working_directory = "/terraform/workspaces"
   vcs_repo {
     identifier     = "scullycorp/terrafromcloud-aws-oidc-bootstrapping"
@@ -12,23 +12,23 @@ resource tfe_workspace "project_manager_workspace" {
 }
 
 resource "tfe_variable" "project_manager_tfe_token" {
-  key = "TFE_TOKEN"
-  value_wo = ephemeral.tfe_team_token.project_management_token.token
-  category = "env"
-  sensitive = true
+  key          = "TFE_TOKEN"
+  value_wo     = ephemeral.tfe_team_token.project_management_token.token
+  category     = "env"
+  sensitive    = true
   workspace_id = tfe_workspace.project_manager_workspace.id
-  description = "TFE Token for managing resources for the TFC Project: ${var.terraform_project}"  
+  description  = "TFE Token for managing resources for the TFC Project: ${var.terraform_project}"
 }
 
 resource "tfe_variable" "project_manager_oauth_token_id" {
 
-  key             = "terraform_oauth_token_id"
-  value           = data.tfe_oauth_client.client.oauth_token_id
-  category        = "terraform"
-  sensitive = true
+  key          = "terraform_oauth_token_id"
+  value        = data.tfe_oauth_client.client.oauth_token_id
+  category     = "terraform"
+  sensitive    = true
   workspace_id = tfe_workspace.project_manager_workspace.id
-  description     = "OAuth Client Token ID for Terraform Cloud GitHub integration"
-  
+  description  = "OAuth Client Token ID for Terraform Cloud GitHub integration"
+
 }
 
 # resource "tfe_variable" "tfc_aws_provider_auth" {
