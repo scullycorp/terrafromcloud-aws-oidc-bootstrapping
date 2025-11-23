@@ -36,6 +36,16 @@ resource "tfe_variable" "project_variable_configuration_terraform_project" {
   description     = "Terraform Cloud project name"
 }
 
+resource "tfe_variable" "project_variable_configuration_terraform_project_id" {
+
+  key             = "terraform_project_id"
+  value           = tfe_project.aws_search_project.id
+  category        = "terraform"
+  variable_set_id = tfe_variable_set.project_variable_configuration.id
+  description     = "Terraform Cloud project ID"
+}
+
+
 resource "tfe_variable" "project_variable_configuration_aws_account_id" {
 
   key             = "aws_account_id"

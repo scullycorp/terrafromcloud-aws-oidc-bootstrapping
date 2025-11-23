@@ -1,7 +1,7 @@
 resource tfe_workspace "project_manager_workspace" {
   name         = "AWS_OIDC_Bootstrap_Workspace"
   organization = var.terraform_organization
-  project_id   = tfe_project.aws_search_project.id
+  project_id   = var.terraform_project
   description = "Configures AWS bootstrap configuration details"
   working_directory = "/terraform/bootstrap/2_aws"
   vcs_repo {
