@@ -17,12 +17,11 @@ variable "terraform_project" {
   }
 }
 
-# variable aws_account_id {
-#   type = string
-#   description = "The AWS Account ID where the IAM Role for Terraform Cloud Workload Identity Federation will be created."
-# }
-
-data "tfe_oauth_client" "client" {
-  organization     = var.terraform_organization
-  service_provider = "github"
+variable aws_account_id {
+  type = string
+  description = "The AWS Account ID where the IAM Role for Terraform Cloud Workload Identity Federation will be created."
+  validation {
+    condition  = length(var.aws_account_id) == 12 && can(regex("^[0-9]{12}$", var.aws_account_id))
+    error_message = "The AWS Account ID must be a 12-digit number."
+  }
 }

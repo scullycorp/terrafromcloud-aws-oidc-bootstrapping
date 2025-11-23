@@ -36,6 +36,15 @@ resource "tfe_variable" "project_variable_configuration_terraform_project" {
   description     = "Terraform Cloud project name"
 }
 
+resource "tfe_variable" "project_variable_configuration_aws_account_id" {
+
+  key             = "aws_account_id"
+  value           = var.aws_account_id
+  category        = "terraform"
+  variable_set_id = tfe_variable_set.project_variable_configuration.id
+  description     = "AWS Account ID for Workload Identity Federation"
+}
+
 resource "tfe_project_variable_set" "project_scope_output_reading_assignment" {
   project_id      = tfe_project.aws_search_project.id
   variable_set_id = tfe_variable_set.project_variable_configuration.id

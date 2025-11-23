@@ -3,7 +3,7 @@ resource tfe_workspace "project_manager_workspace" {
   organization = var.terraform_organization
   project_id   = tfe_project.aws_search_project.id
   description = "Configures AWS bootstrap configuration details"
-  working_directory = "/terraform/btto"
+  working_directory = "/terraform/bootstrap/2_aws"
   vcs_repo {
     identifier     = "scullycorp/terrafromcloud-aws-oidc-bootstrapping"
     branch         = "main"
